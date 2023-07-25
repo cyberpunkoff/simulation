@@ -10,6 +10,22 @@ public abstract class Creature extends Entity {
     int velocity;
     int healthPoints;
 
+    public int getVelocity() {
+        return velocity;
+    }
+
+    public void setVelocity(int velocity) {
+        this.velocity = velocity;
+    }
+
+    public int getHealthPoints() {
+        return healthPoints;
+    }
+
+    public void setHealthPoints(int healthPoints) {
+        this.healthPoints = healthPoints;
+    }
+
     protected ArrayList<Cell> findPath(CellMap map, Cell startCell, Class target) {
         // Реализация алгоритма поиска в ширину
 

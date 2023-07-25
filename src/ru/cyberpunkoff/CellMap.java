@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CellMap {
 
@@ -106,7 +107,12 @@ public class CellMap {
     }
 
     public Set<Cell> getNeighbourCells(Cell cell) {
+
         Set<Cell> neighbours = new HashSet<>();
+
+        if (cell == null)
+            return neighbours;
+
         for (int x = -1; x <= 1; x++) {
             for (int y = -1; y <= 1; y++) {
                 if (x == 0 && y == 0 || x * y != 0) continue;
@@ -120,7 +126,19 @@ public class CellMap {
         return neighbours;
     }
 
+    public <T> HashMap<Cell, T> getEntitiesOfType(Class<T> type) {
+        return cells.entrySet().stream()
+                .filter(e -> type.isInstance(e.getValue()))
+                .map(e -> (Map.Entry<Cell, T>) e)
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (a, b)
+                -> b, HashMap::new));
+    }
+
     public void remove(Cell cell) {
         cells.remove(cell);
+    }
+
+    public int size() {
+        return this.width * this.height;
     }
 }

@@ -17,7 +17,7 @@ public class Simulation {
 
     Simulation() {
 
-        this(30, 30);
+        this(20, 20);
 //        renderer = new Renderer(15, 15);
 //
 //        map = new CellMap();
@@ -31,10 +31,10 @@ public class Simulation {
     Simulation(int width, int height) {
 
         initActions = List.of(
-                new SpawnGrassAction(),
+                //new SpawnGrassAction(),
                 //new SpawnTreeAction(),
-                new SpawnRockAction(),
-                //new SpawnPredatorAction(),
+                //new SpawnRockAction(),
+                new SpawnPredatorAction(),
                 new SpawnHerbivoreAction()
         );
 
@@ -46,7 +46,8 @@ public class Simulation {
 
 
         turnActions = List.of(
-                new MakeMovesAction()
+                new MakeMovesAction(),
+                new SpawnLackingGrassAction()
         );
 
         renderer = new Renderer(width, height);

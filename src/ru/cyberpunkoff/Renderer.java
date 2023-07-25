@@ -35,14 +35,16 @@ public class Renderer extends JPanel {
         JFrame mainFrame = new JFrame("Simulation");
         mainFrame.setSize(width + BORDER_SIZE * 2, height + BORDER_SIZE * 2);
         mainFrame.getContentPane().setBackground(Color.GRAY);
+        mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainFrame.setLayout(new GridBagLayout());
+        // fixme Because of gridBag layout we have problem when Jpanel is too big it's just not showing
 
         setSize(width, height);
         setPreferredSize(new Dimension(width+1, height+1));
         setLayout(null);
         setBackground(Color.BLACK);
 
-        mainFrame.add(this, new GridBagConstraints());
+        mainFrame.add(this);
         mainFrame.setResizable(false);
         mainFrame.setVisible(true);
 

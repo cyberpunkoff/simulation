@@ -5,11 +5,13 @@ import ru.cyberpunkoff.exceptions.OutOfBoundsException;
 import javax.swing.*;
 import java.awt.*;
 
+import java.util.Map;
+
 public class Renderer extends JPanel {
 
     private final int PIXEL_SIZE = 30;
 
-    private final int BORDER_RADIUS = 100;
+    private final int BORDER_SIZE = 100;
 
     private final int pixelWidth;
 
@@ -21,7 +23,7 @@ public class Renderer extends JPanel {
 
     private Graphics g;
 
-    private Map map;
+    private CellMap cellMap;
 
     Renderer(int pixelWidth, int pixelHeight) {
 
@@ -31,7 +33,7 @@ public class Renderer extends JPanel {
         this.width = pixelWidth * PIXEL_SIZE;
 
         JFrame mainFrame = new JFrame("Simulation");
-        mainFrame.setSize(width + BORDER_RADIUS * 2, height + BORDER_RADIUS * 2);
+        mainFrame.setSize(width + BORDER_SIZE * 2, height + BORDER_SIZE * 2);
         mainFrame.getContentPane().setBackground(Color.GRAY);
         mainFrame.setLayout(new GridBagLayout());
 
@@ -75,16 +77,16 @@ public class Renderer extends JPanel {
 
     }
 
-    public void render(Map map) {
-        this.map = map;
+    public void render(CellMap cellMap) {
+        this.cellMap = cellMap;
         repaint();
     }
 
     private void drawMap() {
 
-        java.util.Map<Cell, Entity> map = this.map.getMap();
+        Map<Cell, Entity> map = this.cellMap.getCells();
 
-        for (java.util.Map.Entry<Cell, Entity> entry : map.entrySet()) {
+        for (Map.Entry<Cell, Entity> entry : map.entrySet()) {
             Cell cell = entry.getKey();
             Entity entity = entry.getValue();
             drawPixel(cell.getX(), cell.getY(), entity.getColor());

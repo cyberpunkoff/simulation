@@ -1,18 +1,23 @@
 package ru.cyberpunkoff;
 
-import java.awt.*;
+import ru.cyberpunkoff.actions.Action;
+
+import java.util.List;
 
 public class Simulation {
     int movesCounter;
 
-    Map map;
+    CellMap map;
 
     Renderer renderer;
+
+    List<Action> initActions;
+    List<Action> turnActions;
 
     Simulation() {
         renderer = new Renderer(15, 15);
 
-        map = new Map();
+        map = new CellMap();
 
         renderer.render(map);
 
@@ -20,7 +25,14 @@ public class Simulation {
 
     }
 
+    Simulation(int width, int height) {
+        renderer = new Renderer(width, height);
+        map = new CellMap(width, height);
+    }
+
     public void nextTurn() {
+
+        movesCounter++;
 
     }
 

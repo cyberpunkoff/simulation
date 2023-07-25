@@ -51,8 +51,9 @@ public class Renderer extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         this.g = g;
-        drawGrid();
+
         drawMap();
+        drawGrid();
         //drawPixel(0, 0, Color.RED);
         //drawPixel(228, 228, Color.GREEN);
         //clearPixel(20, 30);

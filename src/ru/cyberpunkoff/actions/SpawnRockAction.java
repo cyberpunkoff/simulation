@@ -4,8 +4,8 @@ import ru.cyberpunkoff.objects.Rock;
 
 public class SpawnRockAction extends SpawnEntityAction<Rock> {
 
-    SpawnRockAction() {
-        this.spawnRate = 0.3;
+    public SpawnRockAction() {
+        this.spawnRate = 0.2;
     }
 
     @Override

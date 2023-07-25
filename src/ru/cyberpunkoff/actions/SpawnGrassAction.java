@@ -4,7 +4,7 @@ import ru.cyberpunkoff.objects.Grass;
 
 public class SpawnGrassAction extends SpawnEntityAction<Grass> {
 
-    SpawnGrassAction() {
+    public SpawnGrassAction() {
         spawnRate = 0.2;
     }
 

@@ -4,8 +4,8 @@ import ru.cyberpunkoff.creatures.Herbivore;
 
 public class SpawnHerbivoreAction extends SpawnEntityAction<Herbivore> {
 
-    SpawnHerbivoreAction() {
-        this.spawnRate = 0.4;
+    public SpawnHerbivoreAction() {
+        this.spawnRate = 0.01;
     }
 
     @Override

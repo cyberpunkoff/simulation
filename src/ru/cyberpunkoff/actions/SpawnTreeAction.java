@@ -4,7 +4,7 @@ import ru.cyberpunkoff.objects.Tree;
 
 public class SpawnTreeAction extends SpawnEntityAction<Tree> {
 
-    SpawnTreeAction() {
+    public SpawnTreeAction() {
         this.spawnRate = 0.1;
     }
 

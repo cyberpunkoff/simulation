@@ -3,8 +3,10 @@ package ru.cyberpunkoff;
 import ru.cyberpunkoff.creatures.Herbivore;
 import ru.cyberpunkoff.creatures.Predator;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Set;
 
 public class CellMap {
 
@@ -82,7 +84,43 @@ public class CellMap {
         cells.put(cell, entity);
     }
 
+    public Cell getCellByEntity(Entity entity) {
+        for (Map.Entry<Cell, Entity> entry : cells.entrySet()) {
+            if (entry.getValue().equals(entity))
+                return entry.getKey();
+        }
+        return null;
+    }
+
+
+    public Entity get(Cell cell) {
+        if (!isEmpty(cell))
+            return cells.get(cell);
+        return null;
+    }
+
+
+
     public boolean isEmpty(Cell cell) {
         return !cells.containsKey(cell);
+    }
+
+    public Set<Cell> getNeighbourCells(Cell cell) {
+        Set<Cell> neighbours = new HashSet<>();
+        for (int x = -1; x <= 1; x++) {
+            for (int y = -1; y <= 1; y++) {
+                if (x == 0 && y == 0 || x * y != 0) continue;
+
+                int newX = cell.getX() + x;
+                int newY = cell.getY() + y;
+                if (newX >= 0 && newX < width && newY >= 0 && newY < height)
+                    neighbours.add(new Cell(newX, newY));
+            }
+        }
+        return neighbours;
+    }
+
+    public void remove(Cell cell) {
+        cells.remove(cell);
     }
 }

@@ -6,12 +6,14 @@ import ru.cyberpunkoff.Entity;
 
 public abstract class SpawnEntityAction<T extends Entity> extends Action {
 
+    // класс абстрактного действия по созданию новой сущности
+
     double spawnRate;
 
     @Override
     public void doAction(CellMap map) {
 
-        double rateDelta = (double) (map.getHeight() * map.getWidth()) / 100;
+        double rateDelta = 1.0 / (map.getHeight() * map.getWidth());
         double rate = 0;
 
         while (rate < spawnRate) {

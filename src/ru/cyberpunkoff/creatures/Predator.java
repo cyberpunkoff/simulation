@@ -1,5 +1,6 @@
 package ru.cyberpunkoff.creatures;
 
+import ru.cyberpunkoff.CellMap;
 import ru.cyberpunkoff.creatures.Creature;
 
 import java.awt.*;
@@ -20,7 +21,7 @@ public class Predator extends Creature {
     }
 
     @Override
-    public void makeMove() {
+    public void makeMove(CellMap map) {
 
     }
 

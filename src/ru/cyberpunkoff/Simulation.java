@@ -1,92 +1,63 @@
 package ru.cyberpunkoff;
 
 import ru.cyberpunkoff.actions.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
+// TODO: implement smooth graphic for more than one velocity?
+// TODO: change path finding algo implementation to interface ?
+// TODO: move color part to renderer +
+
 public class Simulation {
+    private final CellMap map;
+    private final Renderer renderer;
+    private final List<Action> initActions;
+    private final List<Action> turnActions;
     int movesCounter;
-
-    CellMap map;
-
-    Renderer renderer;
-
-    List<Action> initActions;
-    List<Action> turnActions;
+    private boolean isSimulationRunning;
 
     Simulation() {
-
         this(20, 20);
-//        renderer = new Renderer(15, 15);
-//
-//        map = new CellMap();
-//
-//        renderer.render(map);
-
-
-
     }
 
     Simulation(int width, int height) {
 
-        initActions = List.of(
-                //new SpawnGrassAction(),
-                //new SpawnTreeAction(),
-                //new SpawnRockAction(),
-                new SpawnPredatorAction(),
-                new SpawnHerbivoreAction()
-        );
+        initActions = List.of(new SpawnGrassAction(), new SpawnTreeAction(), new SpawnRockAction(), new SpawnPredatorAction(), new SpawnHerbivoreAction());
+        turnActions = List.of(new MakeMovesAction(), new SpawnLackingGrassAction());
 
-        // TODO: implement spawn grass action if not enough
-        // TODO: implement predator activity
-        // TODO: implement smooth graphic for more than one velocity?
-        // TODO: change path finding algo implementation to interface
-        // TODO: move color part to renderer
-
-
-        turnActions = List.of(
-                new MakeMovesAction(),
-                new SpawnLackingGrassAction()
-        );
-
-        renderer = new Renderer(width, height);
+        renderer = new Renderer(width, height, this);
         map = new CellMap(width, height);
 
         for (Action action : initActions)
             action.doAction(map);
 
         renderer.render(map);
-
-        startSimulation();
-
     }
 
     public void nextTurn() {
-
         System.out.println("Current turn " + movesCounter);
         for (Action action : turnActions)
             action.doAction(map);
         renderer.render(map);
         movesCounter++;
-
     }
 
     public void startSimulation() {
-        while (true) {
-            try {
-                Thread.sleep(300);
-                nextTurn();
-                Thread.sleep(300);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+        Thread simulationThread = new Thread(() -> {
+            isSimulationRunning = true;
+            while (isSimulationRunning) {
+                try {
+                    nextTurn();
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
             }
-        }
-
+        });
+        simulationThread.start();
     }
 
     public void pauseSimulation() {
+        isSimulationRunning = false;
 
     }
-
 }

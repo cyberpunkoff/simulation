@@ -6,7 +6,7 @@ import ru.cyberpunkoff.objects.Grass;
 public class SpawnLackingGrassAction extends SpawnEntityAction<Grass> {
 
     double minimalPopulation = 0.04;
-    double targetPopulation = 0.3;
+    double targetPopulation = 0.18;
 
     public SpawnLackingGrassAction() {
         this.spawnRate = targetPopulation;
@@ -22,6 +22,4 @@ public class SpawnLackingGrassAction extends SpawnEntityAction<Grass> {
     Grass createEntity() {
         return new Grass();
     }
-
-
 }

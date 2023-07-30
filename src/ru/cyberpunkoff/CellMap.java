@@ -12,10 +12,8 @@ import java.util.stream.Collectors;
 public class CellMap {
 
     private final Map<Cell, Entity> cells;
-
-    int width;
-
-    int height;
+    private final int width;
+    private final int height;
 
     CellMap(int width, int height) {
         this.width = width;
@@ -40,45 +38,36 @@ public class CellMap {
         cells.put(new Cell(11, 2), pred1);
         cells.put(new Cell(13, 7), pred2);
 
+        this.width = 5;
+        this.height = 5;
+
     }
 
     public int getWidth() {
         return width;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
     public int getHeight() {
         return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
     }
 
     public Map<Cell, Entity> getCells() {
         return cells;
     }
 
-
     public Cell getRandomEmptyCell() {
 
-        if (cells.size() == width * height) // случай, когда вся карта занята
+        if (cells.size() == width * height) // if there is no empty space on the map
             return null;
 
-        // иначе найдется хотя бы одна свободная ячейка
+        // or else we have at least one empty cell
         while (true) {
-
             int x = (int) (getWidth() * Math.random());
             int y = (int) (getHeight() * Math.random());
             Cell cell = new Cell(x, y);
-
             if (isEmpty(cell))
                 return cell;
         }
-
     }
 
     public void add(Cell cell, Entity entity) {
@@ -93,23 +82,18 @@ public class CellMap {
         return null;
     }
 
-
     public Entity get(Cell cell) {
         if (!isEmpty(cell))
             return cells.get(cell);
         return null;
     }
 
-
-
     public boolean isEmpty(Cell cell) {
         return !cells.containsKey(cell);
     }
 
     public Set<Cell> getNeighbourCells(Cell cell) {
-
         Set<Cell> neighbours = new HashSet<>();
-
         if (cell == null)
             return neighbours;
 

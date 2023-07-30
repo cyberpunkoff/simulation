@@ -93,6 +93,8 @@ public class Renderer extends JPanel {
     }
 
     private void drawMap() {
+        if (this.cellMap == null) return; // fix for initial call when there is no map
+
         Map<Cell, Entity> map = this.cellMap.getCells();
 
         for (Map.Entry<Cell, Entity> entry : map.entrySet()) {

@@ -2,13 +2,7 @@ package ru.cyberpunkoff.creatures;
 
 import ru.cyberpunkoff.Cell;
 import ru.cyberpunkoff.CellMap;
-import ru.cyberpunkoff.Entity;
-import ru.cyberpunkoff.creatures.Creature;
 import ru.cyberpunkoff.objects.Grass;
-import ru.cyberpunkoff.objects.Tree;
-
-import java.awt.*;
-import java.util.ArrayList;
 
 public class Herbivore extends Creature {
 
@@ -26,8 +20,6 @@ public class Herbivore extends Creature {
     // true - eat succeed; false - no grass
     private boolean eat(CellMap map) {
         for (Cell neighbour : map.getNeighbourCells(map.getCellByEntity(this))) {
-            //map.add(neighbour, new Predator());
-            //System.out.println(map.get(neighbour));
             if (map.get(neighbour) instanceof Grass) {
                 map.remove(neighbour);
                 healthPoints++;

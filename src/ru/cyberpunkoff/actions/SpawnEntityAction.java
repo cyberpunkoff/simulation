@@ -5,9 +5,7 @@ import ru.cyberpunkoff.CellMap;
 import ru.cyberpunkoff.Entity;
 
 public abstract class SpawnEntityAction<T extends Entity> extends Action {
-
     // класс абстрактного действия по созданию новой сущности
-
     double spawnRate;
 
     @Override
@@ -30,7 +28,4 @@ public abstract class SpawnEntityAction<T extends Entity> extends Action {
     }
 
     abstract T createEntity();
-
-
-    
 }

@@ -2,11 +2,6 @@ package ru.cyberpunkoff.creatures;
 
 import ru.cyberpunkoff.Cell;
 import ru.cyberpunkoff.CellMap;
-import ru.cyberpunkoff.creatures.Creature;
-import ru.cyberpunkoff.objects.Grass;
-
-import java.awt.*;
-import java.util.ArrayList;
 
 public class Predator extends Creature {
     int damage;
@@ -26,8 +21,6 @@ public class Predator extends Creature {
     // attack method: true - attack succeed; false - no target
     private boolean attack(CellMap map) {
         for (Cell neighbour : map.getNeighbourCells(map.getCellByEntity(this))) {
-            //map.add(neighbour, new Predator());
-            //System.out.println(map.get(neighbour));
             if (map.get(neighbour) instanceof Herbivore herbivore) {
                 if (herbivore.getHealthPoints() <= this.damage) map.remove(neighbour);
                 else herbivore.setHealthPoints(herbivore.getHealthPoints() - this.damage);
@@ -39,7 +32,6 @@ public class Predator extends Creature {
 
     @Override
     public void makeMove(CellMap map) {
-        if (!attack(map))
-            moveToEntity(map, Herbivore.class);
+        if (!attack(map)) moveToEntity(map, Herbivore.class);
     }
 }

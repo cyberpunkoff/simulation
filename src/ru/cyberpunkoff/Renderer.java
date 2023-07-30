@@ -92,8 +92,19 @@ public class Renderer extends JPanel {
         for (Map.Entry<Cell, Entity> entry : map.entrySet()) {
             Cell cell = entry.getKey();
             Entity entity = entry.getValue();
-            drawPixel(cell.getX(), cell.getY(), entity.getColor());
+            drawPixel(cell.getX(), cell.getY(), getEntityColor(entity));
         }
+    }
+
+    private Color getEntityColor(Entity entity) {
+        return switch (entity.getClass().getSimpleName()) {
+            case "Grass" -> new Color(0, 100, 0);
+            case "Rock" -> Color.LIGHT_GRAY;
+            case "Tree" -> Color.ORANGE;
+            case "Herbivore" -> Color.GREEN;
+            case "Predator" -> Color.RED;
+            default -> Color.BLACK;
+        };
     }
 
     private void drawPixel(int pixelX, int pixelY, Color color) {

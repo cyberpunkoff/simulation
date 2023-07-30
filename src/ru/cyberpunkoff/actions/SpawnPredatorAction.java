@@ -5,7 +5,7 @@ import ru.cyberpunkoff.creatures.Predator;
 public class SpawnPredatorAction extends SpawnEntityAction<Predator> {
 
     public SpawnPredatorAction() {
-        this.spawnRate = 0.001;
+        this.spawnRate = 0.01;
     }
 
     @Override

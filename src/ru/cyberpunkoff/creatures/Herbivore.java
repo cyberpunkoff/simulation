@@ -21,35 +21,28 @@ public class Herbivore extends Creature {
         this.healthPoints = healthPoints;
         this.velocity = velocity;
     }
-    @Override
-    public void makeMove(CellMap map) {
-        //System.out.println("im in move");
 
-        // TODO: may be subdivide to methods?
-
+    // eating grass method
+    // true - eat succeed; false - no grass
+    private boolean eat(CellMap map) {
         for (Cell neighbour : map.getNeighbourCells(map.getCellByEntity(this))) {
             //map.add(neighbour, new Predator());
             //System.out.println(map.get(neighbour));
             if (map.get(neighbour) instanceof Grass) {
                 map.remove(neighbour);
-
                 healthPoints++;
-                return;
+                return true;
             }
         }
-
-        ArrayList<Cell> path = findPath(map, map.getCellByEntity(this), Grass.class);
-
-        if (path != null) {
-            map.remove(map.getCellByEntity(this));
-            map.add(path.get(Math.min(velocity, path.size() - 1)), this);
-        }
-
-
+        return false;
     }
 
     @Override
-    public Color getColor() {
-        return Color.GREEN;
+    public void makeMove(CellMap map) {
+
+        // if there is nothing to eat moving to the closest grass
+        if (!eat(map))
+            moveToEntity(map, Grass.class);
+
     }
 }

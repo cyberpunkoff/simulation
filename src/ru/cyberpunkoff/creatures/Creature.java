@@ -3,6 +3,7 @@ package ru.cyberpunkoff.creatures;
 import ru.cyberpunkoff.Cell;
 import ru.cyberpunkoff.CellMap;
 import ru.cyberpunkoff.Entity;
+import ru.cyberpunkoff.objects.Grass;
 
 import java.util.*;
 
@@ -26,7 +27,15 @@ public abstract class Creature extends Entity {
         this.healthPoints = healthPoints;
     }
 
-    protected ArrayList<Cell> findPath(CellMap map, Cell startCell, Class target) {
+    protected void moveToEntity(CellMap map, Class<? extends Entity> target) {
+        ArrayList<Cell> path = findPath(map, map.getCellByEntity(this), target);
+        if (path != null) {
+            map.remove(map.getCellByEntity(this));
+            map.add(path.get(Math.min(velocity, path.size() - 1)), this);
+        }
+    }
+
+    protected ArrayList<Cell> findPath(CellMap map, Cell startCell, Class<? extends Entity> target) {
         // Реализация алгоритма поиска в ширину
 
         Queue<ArrayList<Cell>> paths = new LinkedList<>();
